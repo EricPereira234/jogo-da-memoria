@@ -12,6 +12,7 @@
   width: auto;
 }
 
+
 .logoLink{
   display: block;
 }
@@ -25,7 +26,14 @@
   flex: 1;
   display: flex;
   justify-content: flex-end;
-  background-color: blue;
+
+}
+
+.container-grid2{
+  width: 430px;
+  display: grid;
+  grid-template-columns: repeat(4, 4rem);
+  gap: 10px;
 }
 
 @media screen and (max-width: 750px){
@@ -44,5 +52,8 @@
   .container-grid{
     justify-content: center;
     margin: 0 20px;
+  }
+  .container-grid2{
+    justify-content: center;
   }
 }
