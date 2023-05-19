@@ -7,6 +7,7 @@ import Button from './components/Button';
 import Infor from './components/InforItem';
 import Grid from './components/Grid';
 import { items } from './data/items';
+import { time } from 'console';
 
 type GridItem = {
   item: number | null;
@@ -22,6 +23,15 @@ function App() {
   const [gridItems, setGridItems] = useState<GridItem[]>([]);
 
   useEffect(()=> resetGrid(),[]);
+
+  useEffect(()=>{
+    const timer = setInterval(()=>{
+      if(playing){
+        setTimeElapsed(timeElapsed + 1);
+      }
+    }, 1000);
+    return ()=> clearInterval(timer);
+  },[playing, timeElapsed])
 
   const resetGrid = ()=>{
     setTimeElapsed(0);
@@ -58,6 +68,16 @@ function App() {
 
   }
 
+  function formatTime(seconds: number){
+    let minutes = Math.floor(seconds/ 60);
+    seconds -= (minutes * 60);
+
+    let secString = `${seconds < 10? '0' + seconds : seconds }`
+    let secMinut = `${seconds < 10? '0'+ minutes : minutes }`
+
+    return `${secMinut}: ${secString}`;
+  }
+
   return (
     <div className="container">
         <div className='container-info' >
@@ -66,7 +86,7 @@ function App() {
             </div>
 
             <div className='info-area' >
-              <Infor label='Tempo'  value='00:00'/>
+              <Infor label='Tempo'  value={formatTime(timeElapsed)}/>
               <Infor label='Movimentos'  value='0'/>
             </div>
 
