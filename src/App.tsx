@@ -64,8 +64,17 @@ function App() {
 
   }
 
-  function handleItemClick(){
 
+  function handleItemClick(index:number){
+    if(playing && index !== null && showCount < 2){
+      let tmpGrid = [...gridItems];
+
+      if(tmpGrid[index].permanentShown === false && tmpGrid[index].show === false){
+        tmpGrid[index].show = true;
+        setShowCont(showCount +1);
+      }
+      setGridItems(tmpGrid);
+    }
   }
 
   function formatTime(seconds: number){
@@ -104,7 +113,7 @@ function App() {
             <Grid
               key={index}
               item={item}
-              onClick={()=>handleItemClick()}
+              onClick={()=>handleItemClick(index)}
             />
           ))}
          </div>
